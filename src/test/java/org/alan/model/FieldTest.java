@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FieldTest {
 
@@ -22,5 +23,15 @@ public class FieldTest {
         Field field = new RectangleField(rowLength, colLength);
         assertArrayEquals(expected, field.getField());
     }
+
+    @Test
+    public void testPlaceVehicleOnField() {
+        Field field = new RectangleField(5, 5);
+        Vehicle testVehicle = new MarsRover();
+        field.setVehicleInField(testVehicle, 2, 3);
+        var fieldWithVehicle = field.getField();
+        assertEquals(testVehicle.getName(), fieldWithVehicle[2][3]);
+    }
+
 
 }

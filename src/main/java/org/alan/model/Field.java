@@ -16,8 +16,13 @@ public abstract class Field {
         }
     }
 
+    public void setVehicleInField(Vehicle vehicle, int xPos, int yPos) {
+        field[xPos][yPos] = vehicle.getName();
+        vehicle.setCurrentPosX(xPos);
+        vehicle.setCurrentPosY(yPos);
+    }
+
     public String[][] getField() {
         return field;
     }
-
 }
