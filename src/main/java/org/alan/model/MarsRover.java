@@ -4,7 +4,7 @@ public class MarsRover extends Vehicle{
 
     private static final String NAME = "Mars Rover";
 
-    public MarsRover( ){
+    public MarsRover(){
         super(NAME);
     }
 }
