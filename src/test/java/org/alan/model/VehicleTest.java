@@ -5,7 +5,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class VehicleTest {
-
+    @Test
+    public void testCreateMarsRoverVehicle() {
+        Vehicle testRover = new MarsRover();
+        assertEquals("Mars Rover", testRover.getName());
+    }
     @Test
     public void testGetCurrentPosition() {
         var currentX = 23;
@@ -18,10 +22,14 @@ public class VehicleTest {
         assertEquals(currentY, test.getCurrentPosY());
     }
 
-
     @Test
-    public void testCreateMarsRoverVehicle() {
-        Vehicle testRover = new MarsRover();
-        assertEquals("Mars Rover", testRover.getName());
+    public void testGetCurrentFacingPosition() {
+        Vehicle test = new MarsRover();
+        test.setCurrentFacingPosition(CardinalPoint.EAST);
+        assertEquals(CardinalPoint.EAST, test.getCurrentFacingPosition());
     }
+
+
+
+
 }

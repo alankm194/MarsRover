@@ -6,8 +6,13 @@ public abstract class Vehicle {
     private int currentPosX;
     private int currentPosY;
 
+    private CardinalPoint currentFacingPosition;
     public Vehicle(String name){
         this.name = name;
+    }
+
+    public String getName(){
+        return name;
     }
 
     public int getCurrentPosX() {
@@ -26,8 +31,13 @@ public abstract class Vehicle {
         this.currentPosY = currentPosY;
     }
 
-
-    public String getName(){
-        return name;
+    public CardinalPoint getCurrentFacingPosition() {
+        return currentFacingPosition;
     }
+
+    public void setCurrentFacingPosition(CardinalPoint currentFacingPosition) {
+        this.currentFacingPosition = currentFacingPosition;
+    }
+
+
 }
