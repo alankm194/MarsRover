@@ -40,7 +40,6 @@ public enum CardinalPoint {
         if (turnDirection == 0) {
             throw new IllegalArgumentException("input is not a legal direction to turn.");
         }
-
         return orderToCardinalPointMap.get(getNewDirectionKey(turnDirection));
     }
 
