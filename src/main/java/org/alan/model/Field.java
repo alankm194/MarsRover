@@ -22,7 +22,7 @@ public abstract class Field {
         int y = vehicle.getCurrentPosY();
         var move = vehicle.getMovementForCurrentDirection();
         field[y][x] = EMPTY_MARK;
-        field[y + move.getMoveY()][x + move.getMoveX()] = VEHICLE_MARK;
+        field[y + move.moveY()][x + move.moveX()] = VEHICLE_MARK;
     }
 
     public void setVehicleInField(Vehicle vehicle, int xPos, int yPos) {

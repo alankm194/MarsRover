@@ -9,7 +9,7 @@ public class MovementTest {
     @Test
     public void testCreateMovement() {
         Movement move = new Movement(4, 2);
-        assertEquals(4, move.getMoveX());
-        assertEquals(2, move.getMoveY());
+        assertEquals(4, move.moveX());
+        assertEquals(2, move.moveY());
     }
 }
