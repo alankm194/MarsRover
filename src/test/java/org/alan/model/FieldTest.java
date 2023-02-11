@@ -4,8 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class FieldTest {
 
@@ -30,7 +29,7 @@ public class FieldTest {
     }
 
     @Test
-    public void moveVehicleInField() {
+    public void testMoveVehicleInField() {
         String[][] expected = create2dArrayAndFill(5, 5);
         expected[2][3] = "1";
         Field field = new RectangleField(5, 5);
@@ -41,7 +40,21 @@ public class FieldTest {
         assertArrayEquals(expected, field.getField());
     }
 
-    private String[][] create2dArrayAndFill(int rowLength, int colLength) {
+    @Test
+    public void testVehicleOutOfBoundsCheck() {
+        String[][] expected = create2dArrayAndFill(5, 5);
+        int vehicleXPos, vehicleYPos;
+        vehicleYPos = vehicleXPos = 4;
+        expected[vehicleYPos][vehicleXPos] = "1";
+        Field field = new RectangleField(5, 5);
+        Vehicle testVehicle = new MarsRover();
+        field.setVehicleInField(testVehicle, 4,4);
+        testVehicle.setCurrentFacingPosition(CardinalPoint.EAST);
+        var isCrash = field.checkIfVehicleWillCrash(testVehicle);
+        assertTrue(isCrash);
+    }
+
+        private String[][] create2dArrayAndFill(int rowLength, int colLength) {
         var row = new String[rowLength];
         Arrays.fill(row, "0");
         var filledArray = new String[rowLength][colLength];
@@ -51,4 +64,6 @@ public class FieldTest {
         }
         return filledArray;
     }
+
+
 }

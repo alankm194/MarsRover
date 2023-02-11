@@ -22,6 +22,19 @@ public abstract class Field {
         return stringArray;
     }
 
+    public boolean checkIfVehicleWillCrash(Vehicle vehicle) {
+        var movement = vehicle.getMovementForCurrentDirection();
+        int currYPos = vehicle.getCurrentPosY();
+        int nextYPos = currYPos + movement.moveY();
+
+        if (nextYPos >= field.length || 0 > nextYPos) {
+            return true;
+        }
+        int currXPos = vehicle.getCurrentPosX();
+        int nextXPos = currXPos + movement.moveX();
+        return nextXPos >= field[currYPos].length || 0 > nextXPos;
+    }
+
     public void moveVehicleInField(Vehicle vehicle) {
         int x = vehicle.getCurrentPosX();
         int y = vehicle.getCurrentPosY();
