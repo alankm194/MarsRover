@@ -4,17 +4,22 @@ import java.util.Arrays;
 
 public abstract class Field {
 
-    private String[][] field;
+    private final String[][] field;
     private static final String VEHICLE_MARK = "1";
     private static final String EMPTY_MARK = "0";
     public Field(int rowLength, int colLength){
-        field = new String[rowLength][colLength];
+        field = createField(rowLength, colLength);
+    }
+
+    private String[][] createField(int rowLength, int colLength){
+        var stringArray = new String[rowLength][colLength];
         var row = new String[rowLength];
         Arrays.fill(row, EMPTY_MARK);
-        field[0] = row;
+        stringArray[0] = row;
         for (int i=0; i < rowLength;i++) {
-            field[i] = Arrays.copyOf(row, colLength);
+            stringArray[i] = Arrays.copyOf(row, colLength);
         }
+        return stringArray;
     }
 
     public void moveVehicleInField(Vehicle vehicle) {
