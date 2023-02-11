@@ -28,10 +28,10 @@ public class FieldTest {
     public void testPlaceVehicleOnField() {
         Field field = new RectangleField(5, 5);
         Vehicle testVehicle = new MarsRover();
-        field.setVehicleInField(testVehicle, 2, 3);
+        int yPos = 3;
+        int xPos = 2;
+        field.setVehicleInField(testVehicle, xPos, yPos);
         var fieldWithVehicle = field.getField();
-        assertEquals(testVehicle.getName(), fieldWithVehicle[2][3]);
+        assertEquals(testVehicle.getName(), fieldWithVehicle[yPos][xPos]);
     }
-
-
 }
