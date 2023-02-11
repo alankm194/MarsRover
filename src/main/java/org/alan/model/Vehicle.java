@@ -11,8 +11,6 @@ public abstract class Vehicle {
         this.name = name;
     }
 
-
-
     public String getName(){
         return name;
     }
