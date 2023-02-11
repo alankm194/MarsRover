@@ -30,7 +30,7 @@ public enum CardinalPoint {
     CardinalPoint(int order) {
         this.order = order;
     }
-    public CardinalPoint getNewDirection(String turn) {
+    public CardinalPoint getNewDirection(String turn) throws IllegalArgumentException {
         int turnDirection = 0;
         if (turn.equals(LEFT_TURN)) {
             turnDirection = TURN_LEFT;
@@ -38,7 +38,7 @@ public enum CardinalPoint {
             turnDirection = TURN_RIGHT;
         }
         if (turnDirection == 0) {
-            return null;
+            throw new IllegalArgumentException("input is not a legal direction to turn.");
         }
         var newOrderKey = ((order + turnDirection)
                 % TOTAL_CARDINAL_POINTS + TOTAL_CARDINAL_POINTS)

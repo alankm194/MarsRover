@@ -2,8 +2,10 @@ package org.alan.model;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CardinalPointTest {
 
@@ -42,10 +44,22 @@ public class CardinalPointTest {
     }
     @ParameterizedTest
     @CsvSource({"NORTH,NORTH", "EAST,EAST", "SOUTH,SOUTH", "WEST,WEST"})
-    public void WhenNorthAndTurnLeftOnceAndRightOnce_returnSameDirection(String currentPosition, String newPosition) {
+    public void GivenCardinalDirectionOnceAndRightOnce_returnSameDirection(String currentPosition, String newPosition) {
         var expected = CardinalPoint.valueOf(newPosition);
         var current = CardinalPoint.valueOf(currentPosition);
         current = current.getNewDirection("L");
         assertEquals(expected, current.getNewDirection("R"));
     }
+    @ParameterizedTest
+    @ValueSource(strings = {"E", "\t", "\n", "m", "2", "5", "Q", "q"})
+    public void GivenCardinalDirectionAndTurnIsNotLeftRight_ThrowIllegalArgumentException(String input) {
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->
+            CardinalPoint.NORTH.getNewDirection(input)
+        );
+        assertEquals("input is not a legal direction to turn.", exception.getMessage());
+    }
+
+
+
+
 }
