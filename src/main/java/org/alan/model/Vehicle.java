@@ -1,15 +1,17 @@
 package org.alan.model;
 
+
 public abstract class Vehicle {
 
     private final String name;
     private int currentPosX;
     private int currentPosY;
-
     private CardinalPoint currentFacingPosition;
     public Vehicle(String name){
         this.name = name;
     }
+
+
 
     public String getName(){
         return name;
@@ -39,5 +41,6 @@ public abstract class Vehicle {
         this.currentFacingPosition = currentFacingPosition;
     }
 
+    public abstract Movement getMovementForCurrentDirection();
 
 }
