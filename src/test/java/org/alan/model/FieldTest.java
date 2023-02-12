@@ -1,6 +1,8 @@
 package org.alan.model;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 
@@ -8,13 +10,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class FieldTest {
 
-    @Test
-    public void testCreateNewField() {
-        var rowLength = 5;
-        var colLength = 5;
-        var expected = create2dArrayAndFill(rowLength, colLength);
+    @ParameterizedTest
+    @CsvSource({"2,5", "7,3", "5,5"})
+    public void testCreateNewField(int rowLength, int colLength) {
         Field field = new RectangleField(rowLength, colLength);
-        assertArrayEquals(expected, field.getField());
+        String[][] fieldArray = field.getField();
+        assertEquals(fieldArray.length, colLength);
+        Arrays.stream(fieldArray).forEach(arr -> assertEquals(arr.length, rowLength));
+        for (String[] row: fieldArray) {
+            for (String element: row) {
+                assertEquals("0", element);
+            }
+        }
     }
 
     @Test
@@ -57,15 +64,11 @@ public class FieldTest {
         assertTrue(isCrash);
     }
 
-    private String[][] create2dArrayAndFill(int rowLength, int colLength) {
-        var row = new String[rowLength];
-        Arrays.fill(row, "0");
-        var filledArray = new String[rowLength][colLength];
-        filledArray[0] = row;
-        for (int i = 0; i < rowLength; i++) {
-            filledArray[i] = Arrays.copyOf(row, colLength);
-        }
-        return filledArray;
+    private static String[][] create2dArrayAndFill(int rowLength, int colLength){
+        var stringArray = new String[colLength][rowLength];
+        for (String[] row: stringArray)
+            Arrays.fill(row, "0");
+        return stringArray;
     }
 
 

@@ -12,12 +12,9 @@ public abstract class Field {
     }
 
     private String[][] createField(int rowLength, int colLength){
-        var stringArray = new String[rowLength][colLength];
-        var row = new String[rowLength];
-        Arrays.fill(row, EMPTY_MARK);
-        stringArray[0] = row;
-        for (int i=0; i < rowLength;i++) {
-            stringArray[i] = Arrays.copyOf(row, colLength);
+        var stringArray = new String[colLength][rowLength];
+        for (String[] row: stringArray) {
+            Arrays.fill(row, "0");
         }
         return stringArray;
     }
