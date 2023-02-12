@@ -23,4 +23,18 @@ public class CompletePathControllerTest {
         String finalLocation = controller.getFinalLocationForVehicle(vehicle, movementInstructions, 0, 0);
         assertEquals("4 2 E", finalLocation);
     }
+
+    @Test
+    public void testControllerIgnoresCommandsThatLeadsOutOFBounds() {
+        int lengthX = 3;
+        int lengthY = 3;
+        CompletePathController controller = new CompletePathController();
+        controller.setField(lengthX, lengthY);
+        Vehicle vehicle = new MarsRover();
+        vehicle.setCurrentFacingPosition(CardinalPoint.EAST);
+        var movementInstructions = List.of("M", "M", "M", "M");
+        String finalLocation = controller.getFinalLocationForVehicle(vehicle, movementInstructions, 0, 0);
+        assertEquals("2 0 E", finalLocation);
+    }
+
 }

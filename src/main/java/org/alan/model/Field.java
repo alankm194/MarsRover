@@ -21,6 +21,17 @@ public abstract class Field {
         }
         return stringArray;
     }
+    public void moveVehicleInField(Vehicle vehicle) {
+        int x = vehicle.getCurrentPosX();
+        int y = vehicle.getCurrentPosY();
+        var move = vehicle.getMovementForCurrentDirection();
+        if (!checkIfVehicleWillCrash(vehicle)) {
+            field[y][x] = EMPTY_MARK;
+            field[y + move.moveY()][x + move.moveX()] = VEHICLE_MARK;
+            vehicle.setCurrentPosX(vehicle.getCurrentPosX() + move.moveX());
+            vehicle.setCurrentPosY(vehicle.getCurrentPosY() + move.moveY());
+        }
+    }
 
     public boolean checkIfVehicleWillCrash(Vehicle vehicle) {
         var movement = vehicle.getMovementForCurrentDirection();
@@ -35,15 +46,7 @@ public abstract class Field {
         return nextXPos >= field[currYPos].length || 0 > nextXPos;
     }
 
-    public void moveVehicleInField(Vehicle vehicle) {
-        int x = vehicle.getCurrentPosX();
-        int y = vehicle.getCurrentPosY();
-        var move = vehicle.getMovementForCurrentDirection();
-        field[y][x] = EMPTY_MARK;
-        field[y + move.moveY()][x + move.moveX()] = VEHICLE_MARK;
-        vehicle.setCurrentPosX(vehicle.getCurrentPosX() + move.moveX());
-        vehicle.setCurrentPosY(vehicle.getCurrentPosY() + move.moveY());
-    }
+
 
     public void setVehicleInField(Vehicle vehicle, int xPos, int yPos) {
         vehicle.setCurrentPosX(xPos);
