@@ -41,17 +41,22 @@ public abstract class Field {
         var move = vehicle.getMovementForCurrentDirection();
         field[y][x] = EMPTY_MARK;
         field[y + move.moveY()][x + move.moveX()] = VEHICLE_MARK;
+        vehicle.setCurrentPosX(vehicle.getCurrentPosX() + move.moveX());
+        vehicle.setCurrentPosY(vehicle.getCurrentPosY() + move.moveY());
     }
 
     public void setVehicleInField(Vehicle vehicle, int xPos, int yPos) {
-        field[yPos][xPos] = VEHICLE_MARK;
         vehicle.setCurrentPosX(xPos);
-        vehicle.setCurrentPosY(yPos);
+        vehicle.setCurrentPosY(invertYCoordinate(yPos));
+        field[invertYCoordinate(yPos)][xPos] = VEHICLE_MARK;
     }
 
     public String[][] getField() {
         return field;
     }
 
+    public int invertYCoordinate(int yPos) {
+        return Math.abs(yPos - field.length) - 1;
+    }
 
 }

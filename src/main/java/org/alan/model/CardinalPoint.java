@@ -3,10 +3,10 @@ package org.alan.model;
 import java.util.Map;
 
 public enum CardinalPoint {
-    NORTH(0),
-    EAST(1),
-    SOUTH(2),
-    WEST(3);
+    NORTH(0, "N"),
+    EAST(1, "E"),
+    SOUTH(2, "S"),
+    WEST(3, "W");
 
     private static final String LEFT_TURN = "L";
     private static final String RIGHT_TURN = "R";
@@ -26,9 +26,11 @@ public enum CardinalPoint {
     private static final int TOTAL_CARDINAL_POINTS = 4;
 
     private final int order;
+    private final String initial;
 
-    CardinalPoint(int order) {
+    CardinalPoint(int order, String initial) {
         this.order = order;
+        this.initial = initial;
     }
     public CardinalPoint getNewDirection(String turn) throws IllegalArgumentException {
         int turnDirection = 0;
@@ -43,6 +45,9 @@ public enum CardinalPoint {
         return orderToCardinalPointMap.get(getNewDirectionKey(turnDirection));
     }
 
+    public String getInitial(){
+        return initial;
+    }
     private int getNewDirectionKey(int turnDirection) {
         return ((order + turnDirection)
                 % TOTAL_CARDINAL_POINTS + TOTAL_CARDINAL_POINTS)

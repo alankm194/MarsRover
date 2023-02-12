@@ -9,12 +9,11 @@ public class MarsRover extends Vehicle{
 
     static {
         DIRECTION_MOVEMENT_MAP = new EnumMap<>(CardinalPoint.class);
-        DIRECTION_MOVEMENT_MAP.put(CardinalPoint.NORTH, new Movement(0, 1));
+        DIRECTION_MOVEMENT_MAP.put(CardinalPoint.NORTH, new Movement(0, -1));
         DIRECTION_MOVEMENT_MAP.put(CardinalPoint.EAST, new Movement(1, 0));
-        DIRECTION_MOVEMENT_MAP.put(CardinalPoint.SOUTH, new Movement(0, -1));
+        DIRECTION_MOVEMENT_MAP.put(CardinalPoint.SOUTH, new Movement(0, 1));
         DIRECTION_MOVEMENT_MAP.put(CardinalPoint.WEST, new Movement(-1, 0));
     }
-
 
     public MarsRover(){
         super(NAME);

@@ -25,7 +25,7 @@ public class FieldTest {
         int xPos = 2;
         field.setVehicleInField(testVehicle, xPos, yPos);
         var fieldWithVehicle = field.getField();
-        assertEquals("1", fieldWithVehicle[yPos][xPos]);
+        assertEquals("1", fieldWithVehicle[field.invertYCoordinate(yPos)][xPos]);
     }
 
     @Test
@@ -34,9 +34,12 @@ public class FieldTest {
         expected[2][3] = "1";
         Field field = new RectangleField(5, 5);
         Vehicle testVehicle = new MarsRover();
-        field.setVehicleInField(testVehicle, 2,2);
+        field.setVehicleInField(testVehicle, 2, 2);
         testVehicle.setCurrentFacingPosition(CardinalPoint.EAST);
         field.moveVehicleInField(testVehicle);
+        assertEquals(3, testVehicle.getCurrentPosX());
+        assertEquals(2, testVehicle.getCurrentPosY());
+
         assertArrayEquals(expected, field.getField());
     }
 
@@ -48,18 +51,18 @@ public class FieldTest {
         expected[vehicleYPos][vehicleXPos] = "1";
         Field field = new RectangleField(5, 5);
         Vehicle testVehicle = new MarsRover();
-        field.setVehicleInField(testVehicle, 4,4);
+        field.setVehicleInField(testVehicle, 4, 4);
         testVehicle.setCurrentFacingPosition(CardinalPoint.EAST);
         var isCrash = field.checkIfVehicleWillCrash(testVehicle);
         assertTrue(isCrash);
     }
 
-        private String[][] create2dArrayAndFill(int rowLength, int colLength) {
+    private String[][] create2dArrayAndFill(int rowLength, int colLength) {
         var row = new String[rowLength];
         Arrays.fill(row, "0");
         var filledArray = new String[rowLength][colLength];
         filledArray[0] = row;
-        for (int i=0; i < rowLength;i++) {
+        for (int i = 0; i < rowLength; i++) {
             filledArray[i] = Arrays.copyOf(row, colLength);
         }
         return filledArray;
