@@ -1,0 +1,5 @@
+currentdirection,expectedNewDirection,expectedXPos,expectedYPos
+NORTH,WEST,4,7
+SOUTH,EAST,6,3
+EAST,NORTH,7,6
+WEST,SOUTH,3,4
