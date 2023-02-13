@@ -9,6 +9,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 
+import static org.alan.model.field.Field.INBOUND_MARK;
+import static org.alan.model.field.Field.VEHICLE_MARK;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class FieldTest {
@@ -18,11 +20,11 @@ public class FieldTest {
     public void testCreateNewField(int rowLength, int colLength) {
         Field field = new RectangleField(rowLength, colLength);
         String[][] fieldArray = field.getField();
-        assertEquals(fieldArray.length, colLength);
-        Arrays.stream(fieldArray).forEach(arr -> assertEquals(arr.length, rowLength));
+        assertEquals(fieldArray.length, rowLength);
+        Arrays.stream(fieldArray).forEach(arr -> assertEquals(arr.length, colLength));
         for (String[] row: fieldArray) {
             for (String element: row) {
-                assertEquals("0", element);
+                assertEquals(INBOUND_MARK, element);
             }
         }
     }
@@ -35,13 +37,13 @@ public class FieldTest {
         int xPos = 2;
         field.setVehicleInField(testVehicle, xPos, yPos);
         var fieldWithVehicle = field.getField();
-        assertEquals("1", fieldWithVehicle[field.invertYCoordinate(yPos)][xPos]);
+        assertEquals(VEHICLE_MARK, fieldWithVehicle[field.invertYCoordinate(yPos)][xPos]);
     }
 
     @Test
     public void testMoveVehicleInField() {
         String[][] expected = create2dArrayAndFill(5, 5);
-        expected[2][3] = "1";
+        expected[2][3] = VEHICLE_MARK;
         Field field = new RectangleField(5, 5);
         Vehicle testVehicle = new MarsRover();
         field.setVehicleInField(testVehicle, 2, 2);
@@ -70,7 +72,7 @@ public class FieldTest {
     private static String[][] create2dArrayAndFill(int rowLength, int colLength){
         var stringArray = new String[colLength][rowLength];
         for (String[] row: stringArray)
-            Arrays.fill(row, "0");
+            Arrays.fill(row, INBOUND_MARK);
         return stringArray;
     }
 

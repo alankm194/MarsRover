@@ -9,17 +9,20 @@ import java.util.Arrays;
 public abstract class Field {
 
     private final String[][] field;
-    private static final String VEHICLE_MARK = "1";
-    private static final String EMPTY_MARK = "0";
+    protected static final String VEHICLE_MARK = " 1";
+    protected static final String INBOUND_MARK = " 0";
+
+    protected static final String OUT_OF_BOUNDS_MARK = "-1";
+
 
     public Field(int rowLength, int colLength) {
         field = createField(rowLength, colLength);
     }
 
     private String[][] createField(int rowLength, int colLength) {
-        var stringArray = new String[colLength][rowLength];
+        var stringArray = new String[rowLength][colLength];
         for (String[] row : stringArray) {
-            Arrays.fill(row, "0");
+            Arrays.fill(row, OUT_OF_BOUNDS_MARK);
         }
         return stringArray;
     }
@@ -30,7 +33,7 @@ public abstract class Field {
             int y = vehicle.getCurrentPosY();
             var move = vehicle.getMovementForCurrentDirection();
             CardinalPoint currentFace = vehicle.getCurrentFacingPosition();
-            field[y][x] = EMPTY_MARK;
+            field[y][x] = INBOUND_MARK;
             field[y + move.moveY()][x + move.moveX()] = VEHICLE_MARK;
             vehicle.setCurrentPosX(vehicle.getCurrentPosX() + move.moveX());
             vehicle.setCurrentPosY(vehicle.getCurrentPosY() + move.moveY());
@@ -38,15 +41,15 @@ public abstract class Field {
         }
     }
 
-    public CardinalPoint changeVehicleDirection(Movement movement, CardinalPoint currectDirection) {
-        return switch (currectDirection) {
+    public CardinalPoint changeVehicleDirection(Movement movement, CardinalPoint currentDirection) {
+        return switch (currentDirection) {
             case NORTH, SOUTH -> {
                 if (movement.moveX() > 0) {
                     yield CardinalPoint.EAST;
                 } else if (movement.moveX() < 0) {
                     yield CardinalPoint.WEST;
                 }
-                yield currectDirection;
+                yield currentDirection;
 
             }
             case EAST, WEST -> {
@@ -55,7 +58,7 @@ public abstract class Field {
                 } else if (movement.moveY() < 0) {
                     yield CardinalPoint.NORTH;
                 }
-                    yield currectDirection;
+                    yield currentDirection;
             }
 
         };
@@ -88,5 +91,7 @@ public abstract class Field {
     public int invertYCoordinate(int yPos) {
         return Math.abs(yPos - field.length) - 1;
     }
+
+    protected abstract void fillInboundField();
 
 }
