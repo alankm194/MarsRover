@@ -33,8 +33,8 @@ public abstract class Field {
             int y = vehicle.getCurrentPosY();
             var move = vehicle.getMovementForCurrentDirection();
             CardinalPoint currentFace = vehicle.getCurrentFacingPosition();
-            field[y][x] = INBOUND_MARK;
-            field[y + move.moveY()][x + move.moveX()] = VEHICLE_MARK;
+            setFieldLocationAt(x, y, INBOUND_MARK);
+            setFieldLocationAt(x + move.moveX(), y + move.moveY(), VEHICLE_MARK);
             vehicle.setCurrentPosX(vehicle.getCurrentPosX() + move.moveX());
             vehicle.setCurrentPosY(vehicle.getCurrentPosY() + move.moveY());
             vehicle.setCurrentFacingPosition(changeVehicleDirection(move, currentFace));
@@ -68,12 +68,12 @@ public abstract class Field {
         var movement = vehicle.getMovementForCurrentDirection();
         int currYPos = vehicle.getCurrentPosY();
         int nextYPos = currYPos + movement.moveY();
-
-        if (nextYPos >= field.length || 0 > nextYPos) {
-            return true;
-        }
         int currXPos = vehicle.getCurrentPosX();
         int nextXPos = currXPos + movement.moveX();
+        if (nextYPos >= field.length || 0 > nextYPos ) {
+            return true;
+        }
+
         return nextXPos >= field[currYPos].length || 0 > nextXPos;
     }
 
@@ -81,7 +81,7 @@ public abstract class Field {
     public void setVehicleInField(Vehicle vehicle, int xPos, int yPos) {
         vehicle.setCurrentPosX(xPos);
         vehicle.setCurrentPosY(invertYCoordinate(yPos));
-        field[invertYCoordinate(yPos)][xPos] = VEHICLE_MARK;
+        setFieldLocationAt(xPos, invertYCoordinate(yPos), VEHICLE_MARK);
     }
 
     public String[][] getField() {
@@ -90,6 +90,14 @@ public abstract class Field {
 
     public int invertYCoordinate(int yPos) {
         return Math.abs(yPos - field.length) - 1;
+    }
+
+    public String getFieldLocationAt(int x, int y) {
+        return field[y][x];
+    }
+
+    public void setFieldLocationAt(int x, int y, String mark) {
+        field[y][x] = mark;
     }
 
     protected abstract void fillInboundField();

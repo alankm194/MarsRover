@@ -16,10 +16,10 @@ public class CompletePathControllerTest {
 
     @Test
     public void testControllerForACompletePath() {
-        int lengthX = 7;
-        int lengthY = 6;
+        int rowLength = 7;
+        int colLength = 6;
         CompletePathController controller = new CompletePathController();
-        controller.setField(lengthX, lengthY);
+        controller.setField(rowLength, colLength); //6,7
         Vehicle vehicle = new MarsRover();
         vehicle.setCurrentFacingPosition(CardinalPoint.EAST);
         var movementInstructions = List.of("M", "M", "L", "M", "M" , "R", "M", "M");
