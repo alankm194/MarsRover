@@ -1,5 +1,8 @@
-package org.alan.model;
+package org.alan.model.field;
 
+import org.alan.model.vehicle.CardinalPoint;
+import org.alan.model.vehicle.MarsRover;
+import org.alan.model.vehicle.Vehicle;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;

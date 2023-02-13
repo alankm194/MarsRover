@@ -1,8 +1,8 @@
 package org.alan.controller;
 
-import org.alan.model.CardinalPoint;
-import org.alan.model.MarsRover;
-import org.alan.model.Vehicle;
+import org.alan.model.vehicle.CardinalPoint;
+import org.alan.model.vehicle.MarsRover;
+import org.alan.model.vehicle.Vehicle;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

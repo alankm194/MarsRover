@@ -1,4 +1,6 @@
-package org.alan.model;
+package org.alan.model.field;
+
+import org.alan.model.vehicle.Vehicle;
 
 import java.util.Arrays;
 

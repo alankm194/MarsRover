@@ -1,4 +1,4 @@
-package org.alan.model;
+package org.alan.model.vehicle;
 
 
 public abstract class Vehicle {

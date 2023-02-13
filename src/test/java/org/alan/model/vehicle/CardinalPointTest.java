@@ -1,4 +1,4 @@
-package org.alan.model;
+package org.alan.model.vehicle;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;

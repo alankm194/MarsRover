@@ -1,8 +1,8 @@
-package org.alan.model;
+package org.alan.model.vehicle;
 
 import java.util.EnumMap;
 
-public class MarsRover extends Vehicle{
+public class MarsRover extends Vehicle {
 
     private static final String NAME = "Mars Rover";
     private static final EnumMap<CardinalPoint, Movement> DIRECTION_MOVEMENT_MAP;

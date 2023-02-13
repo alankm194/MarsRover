@@ -1,8 +1,8 @@
 package org.alan.controller;
 
-import org.alan.model.Field;
-import org.alan.model.RectangleField;
-import org.alan.model.Vehicle;
+import org.alan.model.field.Field;
+import org.alan.model.field.RectangleField;
+import org.alan.model.vehicle.Vehicle;
 
 import java.util.List;
 
