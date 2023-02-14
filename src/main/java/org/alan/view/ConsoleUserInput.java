@@ -1,5 +1,6 @@
 package org.alan.view;
 
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.Arrays;
@@ -7,21 +8,23 @@ public class ConsoleUserInput {
 
     private static final Set<String> ACCEPTABLE_MOVEMENTS= Set.of("L", "M", "R");
     private static final Set<String> ACCEPTABLE_CARDINAL_POINTS = Set.of("N", "S", "E", "W");
+    private static final Set<String> ACCEPTABLE_VEHICLE_TYPES = Set.of("Knight Rover", "Mars Rover");
+
+    private static final Set<String> ACCEPTABLE_FIELD_TYPES = Set.of("Circle", "Rectangle");
+
 
     public VehicleFieldDTO getUserInputData() {
 
         Scanner in = new Scanner(System.in);
-        System.out.println("""
-                Please enter Length and height dimensions to setup Plateau.
-                an example input 5 4""");
 
-        int[] fieldDimensions;
         int[] startCoordinatesVehicle;
-        String cardinalDirection;
+        String fieldType = getFieldType(in);
 
-        fieldDimensions = getFieldDimensionInputData(in);
+        int[] fieldDimensions = getFieldDimensionInputData(in);
+
         System.out.println("Please enter Vehicle starting position");
         String[] vehicleData;
+        String cardinalDirection;
         do {
             vehicleData = getVehiclePositionInputData(in);
             try {
@@ -34,7 +37,7 @@ public class ConsoleUserInput {
                 System.out.println("vehicle starting position must be within the confines of field");
                 continue;
             }
-            if (!(parseCardinalDirection(vehicleData[2]))) {
+            if (!(ACCEPTABLE_CARDINAL_POINTS.contains(vehicleData[2]))) {
                 System.out.println("Please enter a valid cardinal direction must be one of N, S, E, W. Please try again");
                 continue;
             }
@@ -42,7 +45,19 @@ public class ConsoleUserInput {
             break;
         } while (true);
 
-        System.out.println("please enter movements for Mars Rover");
+        String vehicleType  = getVehicleType(in);
+        List<String> ListOfMovements = getListOfMovements(in);
+        return new VehicleFieldDTO(fieldDimensions,
+                startCoordinatesVehicle,
+                cardinalDirection,
+                ListOfMovements,
+                vehicleType,
+                fieldType);
+    }
+
+
+    private List<String> getListOfMovements(Scanner in) {
+        System.out.println("please enter movements for vehicle");
         String[] movements;
         do {
             movements = in.nextLine().trim().split("");
@@ -52,10 +67,38 @@ public class ConsoleUserInput {
             }
             break;
         } while (true);
-        return new VehicleFieldDTO(fieldDimensions, startCoordinatesVehicle, cardinalDirection, Arrays.asList(movements));
+        return Arrays.asList(movements);
     }
-
-    public int[] getFieldDimensionInputData(Scanner in) {
+    private String getFieldType(Scanner in) {
+        String fieldType;
+        System.out.println("Please choose a Field, your options are Rectangle or Circle");
+        do {
+            fieldType = in.nextLine();
+            if (!ACCEPTABLE_FIELD_TYPES.contains(fieldType)) {
+                System.out.println("Please enter either \"Rectangle\" or \"Circle\" exactly ");
+                continue;
+            }
+            break;
+        } while(true);
+        return fieldType;
+    }
+    private String getVehicleType(Scanner in) {
+        String vehicleType;
+        System.out.println("Please choose a vehicle, your options are Mars Rover or Knight Rover");
+        do {
+            vehicleType = in.nextLine();
+            if (!ACCEPTABLE_VEHICLE_TYPES.contains(vehicleType)) {
+                System.out.println("Please enter either \"Knight Rover\" or \"Mars Rover\" exactly ");
+                continue;
+            }
+            break;
+        } while(true);
+        return vehicleType;
+    }
+    private int[] getFieldDimensionInputData(Scanner in) {
+        System.out.println("""
+                Please enter Length and height dimensions to setup Plateau.
+                an example input 5 4""");
         int firstNumber;
         int secondNumber;
         do {
@@ -104,9 +147,6 @@ public class ConsoleUserInput {
         return new int[]{Integer.parseInt(xPos), Integer.parseInt(yPos)};
     }
 
-    private boolean parseCardinalDirection(String direction) {
-        return ACCEPTABLE_CARDINAL_POINTS.contains(direction);
-    }
 
     private boolean hasAllAcceptableMovementInstructions(String[] movementInstruction) {
         if (movementInstruction.length == 0) {

@@ -1,12 +1,14 @@
 package org.alan.view;
 
 
-import java.util.Arrays;
+import java.util.List;
 
 public record VehicleFieldDTO(int[] fieldDimensions,
                               int[] vehiclePosition,
                               String vehicleFacing,
-                              String[] movementInstructions) {
+                              List<String> movementInstructions,
+                              String vehicleType,
+                              String fieldType) {
 
     @Override
     public String toString() {
@@ -14,11 +16,16 @@ public record VehicleFieldDTO(int[] fieldDimensions,
                         Field dimensions: %d,%d
                         Vehicle starting position: %d,%d
                         Vehicle cardinal direction: %s
-                        movement Instructions: %s""",
+                        Movement instructions: %s
+                        Vehicle type: %s
+                        Field Type: %s
+                        """,
                 fieldDimensions[0], fieldDimensions[1],
                 vehiclePosition[0], vehiclePosition[1],
                 vehicleFacing,
-                Arrays.toString(movementInstructions)
+                movementInstructions.toString(),
+                vehicleType,
+                fieldType
         );
     }
 }
