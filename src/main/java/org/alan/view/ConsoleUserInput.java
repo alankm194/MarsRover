@@ -8,11 +8,6 @@ public class ConsoleUserInput {
     private static final Set<String> ACCEPTABLE_MOVEMENTS= Set.of("L", "M", "R");
     private static final Set<String> ACCEPTABLE_CARDINAL_POINTS = Set.of("N", "S", "E", "W");
 
-    public static void main(String[] args) {
-        ConsoleUserInput sdp = new ConsoleUserInput();
-        sdp.getUserInputData();
-    }
-
     public VehicleFieldDTO getUserInputData() {
 
         Scanner in = new Scanner(System.in);
@@ -46,6 +41,7 @@ public class ConsoleUserInput {
             cardinalDirection = vehicleData[2];
             break;
         } while (true);
+
         System.out.println("please enter movements for Mars Rover");
         String[] movements;
         do {
@@ -56,7 +52,7 @@ public class ConsoleUserInput {
             }
             break;
         } while (true);
-        return new VehicleFieldDTO(fieldDimensions, startCoordinatesVehicle, cardinalDirection, movements);
+        return new VehicleFieldDTO(fieldDimensions, startCoordinatesVehicle, cardinalDirection, Arrays.asList(movements));
     }
 
     public int[] getFieldDimensionInputData(Scanner in) {
