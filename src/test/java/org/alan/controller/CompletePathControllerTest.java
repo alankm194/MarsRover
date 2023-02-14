@@ -20,8 +20,7 @@ public class CompletePathControllerTest {
         int colLength = 6;
         CompletePathController controller = new CompletePathController();
         controller.setField(rowLength, colLength); //6,7
-        Vehicle vehicle = new MarsRover();
-        vehicle.setCurrentFacingPosition(CardinalPoint.EAST);
+        Vehicle vehicle = new MarsRover(CardinalPoint.EAST);
         var movementInstructions = List.of("M", "M", "L", "M", "M" , "R", "M", "M");
         String finalLocation = controller.getFinalLocationForVehicle(vehicle, movementInstructions, 0, 0);
         assertEquals("4 2 E", finalLocation);
@@ -33,8 +32,7 @@ public class CompletePathControllerTest {
         int lengthY = 3;
         CompletePathController controller = new CompletePathController();
         controller.setField(lengthX, lengthY);
-        Vehicle vehicle = new MarsRover();
-        vehicle.setCurrentFacingPosition(CardinalPoint.EAST);
+        Vehicle vehicle = new MarsRover(CardinalPoint.EAST);
         var movementInstructions = List.of("M", "M", "M", "M");
         String finalLocation = controller.getFinalLocationForVehicle(vehicle, movementInstructions, 0, 0);
         assertEquals("2 0 E", finalLocation);
@@ -48,8 +46,7 @@ public class CompletePathControllerTest {
         CardinalPoint expectedDirection = CardinalPoint.valueOf(expectedDir);
         CompletePathController controller = new CompletePathController();
         controller.setField(lengthX, lengthY);
-        Vehicle vehicle = new KnightVehicle();
-        vehicle.setCurrentFacingPosition(CardinalPoint.valueOf(currDir));
+        Vehicle vehicle = new KnightVehicle(CardinalPoint.valueOf(currDir));
         var movementInstructions = List.of("M");
         String finalLocation = controller.getFinalLocationForVehicle(vehicle, movementInstructions, 5, 5);
         assertEquals(String.format("%d %d %s", expectedXPos, expectedYPos, expectedDirection.getInitial()),

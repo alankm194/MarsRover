@@ -7,7 +7,8 @@ public abstract class Vehicle {
     private int currentPosX;
     private int currentPosY;
     private CardinalPoint currentFacingPosition;
-    public Vehicle(String name){
+    public Vehicle(String name, CardinalPoint currentFacingPosition){
+        this.currentFacingPosition = currentFacingPosition;
         this.name = name;
     }
 

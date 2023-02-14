@@ -15,8 +15,8 @@ public class MarsRover extends Vehicle {
         DIRECTION_MOVEMENT_MAP.put(CardinalPoint.WEST, new Movement(-1, 0));
     }
 
-    public MarsRover(){
-        super(NAME);
+    public MarsRover(CardinalPoint currentFacingDirection){
+        super(NAME, currentFacingDirection);
     }
     @Override
     public Movement getMovementForCurrentDirection() {

@@ -10,8 +10,7 @@ public class KnightVehicleTest {
     @ParameterizedTest
     @CsvSource({"NORTH,-1,-2", "SOUTH,1,2", "EAST,2,-1", "WEST,-2,1"})
     public void GivenKnightRoverFacesCurrentDirection_returnAcceptedMovementsForDirection(String direction, int x, int y) {
-        Vehicle test = new KnightVehicle();
-        test.setCurrentFacingPosition(CardinalPoint.valueOf(direction));
+        Vehicle test = new KnightVehicle(CardinalPoint.valueOf(direction));
         var expected = new Movement(x, y);
         assertEquals(expected, test.getMovementForCurrentDirection());
     }

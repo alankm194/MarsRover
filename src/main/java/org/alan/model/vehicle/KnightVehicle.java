@@ -13,8 +13,8 @@ public class KnightVehicle extends Vehicle{
         DIRECTION_MOVEMENT_MAP.put(CardinalPoint.SOUTH, new Movement(1, 2));
         DIRECTION_MOVEMENT_MAP.put(CardinalPoint.WEST, new Movement(-2, 1));
     }
-    public KnightVehicle() {
-        super(NAME);
+    public KnightVehicle(CardinalPoint currentFacingDirection) {
+        super(NAME, currentFacingDirection);
     }
 
     @Override

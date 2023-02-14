@@ -32,7 +32,7 @@ public class FieldTest {
     @Test
     public void testPlaceVehicleOnField() {
         Field field = new RectangleField(5, 5);
-        Vehicle testVehicle = new MarsRover();
+        Vehicle testVehicle = new MarsRover(CardinalPoint.EAST);
         int yPos = 0;
         int xPos = 0;
         field.setVehicleInField(testVehicle, xPos, yPos);
@@ -44,9 +44,8 @@ public class FieldTest {
         String[][] expected = create2dArrayAndFill(5, 7);
         expected[1][3] = VEHICLE_MARK;
         Field field = new RectangleField(5, 7);
-        Vehicle testVehicle = new MarsRover();
+        Vehicle testVehicle = new MarsRover(CardinalPoint.EAST);
         field.setVehicleInField(testVehicle, 2, 3);
-        testVehicle.setCurrentFacingPosition(CardinalPoint.EAST);
         field.moveVehicleInField(testVehicle);
         assertEquals(3, testVehicle.getCurrentPosX());
         assertEquals(1, testVehicle.getCurrentPosY());
@@ -61,9 +60,8 @@ public class FieldTest {
         vehicleYPos = vehicleXPos = 4;
         expected[vehicleYPos][vehicleXPos] = "1";
         Field field = new RectangleField(5, 5);
-        Vehicle testVehicle = new MarsRover();
+        Vehicle testVehicle = new MarsRover(CardinalPoint.EAST);
         field.setVehicleInField(testVehicle, 4, 4);
-        testVehicle.setCurrentFacingPosition(CardinalPoint.EAST);
         var isCrash = field.checkIfVehicleWillCrash(testVehicle);
         assertTrue(isCrash);
     }
