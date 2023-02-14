@@ -15,12 +15,20 @@ public enum CardinalPoint {
 
     private static final Map<Integer, CardinalPoint> orderToCardinalPointMap;
 
+    private static final Map<String, CardinalPoint> initialToCardinalPoint;
+
     static {
         orderToCardinalPointMap = Map.of(
                 0, NORTH,
                 1, EAST,
                 2, SOUTH,
                 3, WEST);
+        initialToCardinalPoint = Map.of(
+                "N", NORTH,
+                "E", EAST,
+                "S", SOUTH,
+                "W", WEST
+        );
     }
 
     private static final int TOTAL_CARDINAL_POINTS = 4;
@@ -52,5 +60,9 @@ public enum CardinalPoint {
         return ((order + turnDirection)
                 % TOTAL_CARDINAL_POINTS + TOTAL_CARDINAL_POINTS)
                 % TOTAL_CARDINAL_POINTS;
+    }
+
+    public static CardinalPoint getCardinalDirectionFromInitial(String initial) {
+        return initialToCardinalPoint.get(initial);
     }
 }

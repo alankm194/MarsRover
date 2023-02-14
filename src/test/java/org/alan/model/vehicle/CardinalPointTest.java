@@ -59,6 +59,11 @@ public class CardinalPointTest {
         assertEquals("input is not a legal direction to turn.", exception.getMessage());
     }
 
+    @ParameterizedTest
+    @CsvSource({"N,NORTH", "E,EAST", "S,SOUTH", "W,WEST"})
+    public void GivenInitial_ThenReturnCorrectCardinalDirection(String input, String expected) {
+        assertEquals(CardinalPoint.valueOf(expected), CardinalPoint.getCardinalDirectionFromInitial(input));
+    }
 
 
 
