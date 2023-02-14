@@ -54,16 +54,22 @@ public class FieldTest {
     }
 
     @Test
-    public void testVehicleOutOfBoundsCheck() {
-        String[][] expected = create2dArrayAndFill(5, 5);
+    public void testVehicleOutOfBoundsCheckWhenVehicleIsOutsideFieldParameters_ReturnTrue() {
         int vehicleXPos, vehicleYPos;
         vehicleYPos = vehicleXPos = 4;
-        expected[vehicleYPos][vehicleXPos] = "1";
         Field field = new RectangleField(5, 5);
         Vehicle testVehicle = new MarsRover(CardinalPoint.EAST);
-        field.setVehicleInField(testVehicle, 4, 4);
-        var isCrash = field.checkIfVehicleWillCrash(testVehicle);
-        assertTrue(isCrash);
+        field.setVehicleInField(testVehicle, vehicleXPos, vehicleYPos);
+        assertTrue(field.checkIfVehicleWillCrash(testVehicle));
+    }
+
+    @ParameterizedTest
+    @CsvSource({"EAST,3,0", "SOUTH,0,1", "WEST,1,4", "NORTH,4,3"})
+    public void testVehicleOutOfBoundsCheckWhenVehicleLandsOnOutOfBoundsPosition_ReturnTrue(String facingPosition, int xPos, int yPos) {
+        Field field = new CircleField(5, 5);
+        Vehicle testVehicle = new MarsRover(CardinalPoint.valueOf(facingPosition));
+        field.setVehicleInField(testVehicle, xPos, yPos);
+        assertTrue(field.checkIfVehicleWillCrash(testVehicle));
     }
 
     private static String[][] create2dArrayAndFill(int rowLength, int colLength){
