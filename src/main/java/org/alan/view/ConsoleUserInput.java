@@ -122,7 +122,7 @@ public class ConsoleUserInput {
         if (0 > vehicleData[0] || vehicleData[0] >= fieldData[0])  {
             return false;
         }
-        return 0 < vehicleData[1] && vehicleData[1] < fieldData[1];
+        return 0 <= vehicleData[1] && vehicleData[1] < fieldData[1];
     }
 
     private String[] getVehiclePositionInputData(Scanner in) {
