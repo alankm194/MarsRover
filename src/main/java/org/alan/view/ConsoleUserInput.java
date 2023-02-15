@@ -98,9 +98,11 @@ public class ConsoleUserInput {
     private int[] getFieldDimensionInputData(Scanner in) {
         System.out.println("""
                 Please enter Length and height dimensions to setup Plateau.
-                an example input 5 4""");
-        int firstNumber;
-        int secondNumber;
+                an example input 5 4
+                minimum length for both dimensions is 3
+                maximium length for both directions is 300""");
+        int rowLength;
+        int colLength;
         do {
             try {
                 var fieldDataArray = in.nextLine().trim().split(" ");
@@ -108,14 +110,22 @@ public class ConsoleUserInput {
                     System.out.println("input length must be of length 2, example input 3 5. Please try again");
                     continue;
                 }
-                firstNumber = Integer.parseInt(fieldDataArray[0]);
-                secondNumber = Integer.parseInt(fieldDataArray[1]);
+                rowLength = Integer.parseInt(fieldDataArray[0]);
+                colLength = Integer.parseInt(fieldDataArray[1]);
+                if ( rowLength < 3 || rowLength > 300 ) {
+                    System.out.println("row length must be between 3 and 300. please try again");
+                    continue;
+                }
+                if ( colLength < 3 || colLength > 300 ) {
+                    System.out.println("column length must be between 3 and 300. Please try again");
+                    continue;
+                }
                 break;
             } catch (NumberFormatException E) {
                 System.out.println("input must be 2 integers only, example input 3 5. Please try again");
             }
         } while (true);
-        return new int[]{firstNumber, secondNumber};
+        return new int[]{rowLength, colLength};
     }
 
     private boolean isVehicleInsideField(int[] fieldData, int[] vehicleData) {
