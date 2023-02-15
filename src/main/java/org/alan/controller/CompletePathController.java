@@ -20,18 +20,23 @@ public class CompletePathController implements Controller {
     private static final String KNIGHT_ROVER = "Knight Rover";
 
     @Override
-    public void startController(VehicleFieldDTO vehicleFieldDTO, ConsoleOutput output) {
+    public void startController(VehicleFieldDTO vehicleFieldDTO, ConsoleOutput output) throws IllegalArgumentException{
         int[] fieldDimensions = vehicleFieldDTO.fieldDimensions();
         int[] vehicleStartCoordinates = vehicleFieldDTO.vehiclePosition();
 
         setField(fieldDimensions[0], fieldDimensions[1], vehicleFieldDTO.fieldType());
+        if (field.checkPositionIsOutOfBound(vehicleStartCoordinates[0], vehicleStartCoordinates[1])) {
+            throw new IllegalArgumentException("Vehicle is set in an illegal place");
+        }
         CardinalPoint direction = CardinalPoint.getCardinalDirectionFromInitial(vehicleFieldDTO.vehicleFacing());
         Vehicle vehicle = createVehicle(vehicleFieldDTO.vehicleType(), direction);
         String finalLocation = getFinalLocationForVehicle(vehicle,
                 vehicleFieldDTO.movementInstructions(),
                 vehicleStartCoordinates[0],
                 vehicleStartCoordinates[1]);
-        output.outputToConsole(finalLocation);
+
+        output.outputFieldToConsole(field.getField(), "Output of final position of field with vehicle, Vehicle is marked as 1");
+        output.outputAnswerToConsole(finalLocation, String.format("final Coordinates for %s", vehicleFieldDTO.vehicleType()));
     }
 
     private Vehicle createVehicle(String vehicleType, CardinalPoint startDirection) {

@@ -85,7 +85,7 @@ public class CompletePathControllerTest {
         ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
         controller.startController(vehicleFieldDTO, mockedOutput);
 
-        verify(mockedOutput, times(1)).outputToConsole(argumentCaptor.capture());
+        verify(mockedOutput, times(1)).outputAnswerToConsole(argumentCaptor.capture(), any());
         assertEquals(expectedOutput, argumentCaptor.getValue());
     }
 
