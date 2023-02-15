@@ -9,7 +9,7 @@ import java.util.Arrays;
 public abstract class Field {
 
     private final String[][] field;
-    protected static final String VEHICLE_MARK = " 1";
+    protected static final String STARTING_VEHICLE_MARK = " 1";
     protected static final String INBOUND_MARK = " 0";
     protected static final String OUT_OF_BOUNDS_MARK = "-1";
     protected static final String FINAL_VEHICLE_LOCATION_MARK = " 2";
@@ -34,11 +34,11 @@ public abstract class Field {
             int y = vehicle.getCurrentPosY();
             var move = vehicle.getMovementForCurrentDirection();
             CardinalPoint currentFace = vehicle.getCurrentFacingPosition();
-            setFieldLocationAt(x + move.moveX(), y + move.moveY(), VEHICLE_MARK);
+            setFieldLocationAt(x, y, vehicle.getCurrentFacingPosition().getArrow());
+            setFieldLocationAt(x + move.moveX(), y + move.moveY(), STARTING_VEHICLE_MARK);
             vehicle.setCurrentPosX(vehicle.getCurrentPosX() + move.moveX());
             vehicle.setCurrentPosY(vehicle.getCurrentPosY() + move.moveY());
             vehicle.setCurrentFacingPosition(changeVehicleDirection(move, currentFace));
-            setFieldLocationAt(x, y, vehicle.getCurrentFacingPosition().getArrow());
         }
 
     }
@@ -90,7 +90,7 @@ public abstract class Field {
     public void setVehicleInField(Vehicle vehicle, int xPos, int yPos) {
         vehicle.setCurrentPosX(xPos);
         vehicle.setCurrentPosY(invertYCoordinate(yPos));
-        setFieldLocationAt(xPos, invertYCoordinate(yPos), VEHICLE_MARK);
+        setFieldLocationAt(xPos, invertYCoordinate(yPos), STARTING_VEHICLE_MARK);
     }
 
     public String[][] getField() {
@@ -111,6 +111,10 @@ public abstract class Field {
 
     public void setFinalVehicleLocation(int finalX, int finalY) {
         setFieldLocationAt(finalX, finalY, FINAL_VEHICLE_LOCATION_MARK);
+    }
+
+    public void setStartingVehicleLocation(int finalX, int finalY) {
+        setFieldLocationAt(finalX, invertYCoordinate(finalY), STARTING_VEHICLE_MARK);
     }
 
     protected abstract void fillInboundField();

@@ -35,19 +35,24 @@ public class FieldTest {
         int yPos = 0;
         int xPos = 0;
         field.setVehicleInField(testVehicle, xPos, yPos);
-        assertEquals(VEHICLE_MARK, field.getFieldLocationAt(xPos, field.invertYCoordinate(yPos)));
+        assertEquals(STARTING_VEHICLE_MARK, field.getFieldLocationAt(xPos, field.invertYCoordinate(yPos)));
     }
 
     @Test
     public void testMoveVehicleInField() {
         String[][] expected = create2dArrayAndFill(5, 7);
-        expected[1][3] = VEHICLE_MARK;
+        expected[1][2] = " →";
+        expected[1][3] = STARTING_VEHICLE_MARK;
+
+        System.out.println();
         Field field = new RectangleField(5, 7);
         Vehicle testVehicle = new MarsRover(CardinalPoint.EAST);
         field.setVehicleInField(testVehicle, 2, 3);
+
         field.moveVehicleInField(testVehicle);
         assertEquals(3, testVehicle.getCurrentPosX());
         assertEquals(1, testVehicle.getCurrentPosY());
+
         assertArrayEquals(expected, field.getField());
 
     }
@@ -104,10 +109,18 @@ public class FieldTest {
 
     @ParameterizedTest
     @CsvSource({"3,0", "0,1", "5,4", "9,9"})
-    public void testSettingfinalVehicleLocation(int finalX, int finalY) {
+    public void testSettingFinalVehicleLocation(int finalX, int finalY) {
         Field field = new CircleField(15, 15);
         field.setFinalVehicleLocation(finalX, finalY);
         assertEquals(FINAL_VEHICLE_LOCATION_MARK, field.getFieldLocationAt(finalX, finalY));
+    }
+
+    @ParameterizedTest
+    @CsvSource({"9,0", "0,1", "14,14", "4,2"})
+    public void testSettingStartingVehicleLocation(int finalX, int finalY) {
+        Field field = new CircleField(15, 15);
+        field.setStartingVehicleLocation(finalX, finalY);
+        assertEquals(STARTING_VEHICLE_MARK, field.getFieldLocationAt(finalX, field.invertYCoordinate(finalY)));
     }
 
 

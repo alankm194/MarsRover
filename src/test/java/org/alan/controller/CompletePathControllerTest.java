@@ -61,7 +61,7 @@ public class CompletePathControllerTest {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/completePathFullTest.csv", numLinesToSkip = 1)
-    public void testStartController(int fieldRowLength,
+    public void testStartControllerOutputsCorrectFinalLocation(int fieldRowLength,
                                     int fieldColLength,
                                     int vehicleStartX,
                                     int vehicleStartY,

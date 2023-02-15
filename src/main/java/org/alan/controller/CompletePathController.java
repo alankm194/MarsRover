@@ -66,6 +66,7 @@ public class CompletePathController implements Controller {
                 field.moveVehicleInField(vehicle);
             }
         }
+        field.setStartingVehicleLocation(startX, startY);
         field.setFinalVehicleLocation(vehicle.getCurrentPosX(), vehicle.getCurrentPosY());
         return String.format("%s %s %s",
                 vehicle.getCurrentPosX(),
