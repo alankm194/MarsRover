@@ -39,9 +39,7 @@ public abstract class Field {
             vehicle.setCurrentPosY(vehicle.getCurrentPosY() + move.moveY());
             vehicle.setCurrentFacingPosition(changeVehicleDirection(move, currentFace));
         }
-        for (String[] arr: field){
-            System.out.println(Arrays.toString(arr));
-        }
+
     }
 
     public CardinalPoint changeVehicleDirection(Movement movement, CardinalPoint currentDirection) {
@@ -79,9 +77,13 @@ public abstract class Field {
         if (nextXPos >= field[currYPos].length  || 0 > nextXPos) {
             return true;
         }
-        return getFieldLocationAt(nextXPos, nextYPos).equals(OUT_OF_BOUNDS_MARK);
+        return checkPositionIsOutOfBound(nextXPos, nextYPos);
     }
 
+
+    public boolean checkPositionIsOutOfBound(int xPos, int yPos) {
+        return getFieldLocationAt(xPos, yPos).equals(OUT_OF_BOUNDS_MARK);
+    }
 
 
     public void setVehicleInField(Vehicle vehicle, int xPos, int yPos) {

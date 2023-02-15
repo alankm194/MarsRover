@@ -97,5 +97,11 @@ public class FieldTest {
         assertEquals(INBOUND_MARK, field.getFieldLocationAt(x, y));
     }
 
+    @Test
+    public void whenVehicleIsSetToBePlacedOutOfBound_returnTrue() {
+        Field field = new CircleField(3, 3);
+        assertTrue(field.checkPositionIsOutOfBound(2, 2));
+    }
+
 
 }
