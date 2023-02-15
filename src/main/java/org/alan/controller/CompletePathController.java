@@ -56,6 +56,7 @@ public class CompletePathController implements Controller {
     }
 
 
+
     public String getFinalLocationForVehicle(Vehicle vehicle, List<String> movementInstructions, int startX, int startY) {
         field.setVehicleInField(vehicle, startX, startY);
         for (String instruction : movementInstructions) {
@@ -65,6 +66,7 @@ public class CompletePathController implements Controller {
                 field.moveVehicleInField(vehicle);
             }
         }
+        field.setFinalVehicleLocation(vehicle.getCurrentPosX(), vehicle.getCurrentPosY());
         return String.format("%s %s %s",
                 vehicle.getCurrentPosX(),
                 field.invertYCoordinate(vehicle.getCurrentPosY()),

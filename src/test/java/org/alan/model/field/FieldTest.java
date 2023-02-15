@@ -9,8 +9,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 
-import static org.alan.model.field.Field.INBOUND_MARK;
-import static org.alan.model.field.Field.VEHICLE_MARK;
+import static org.alan.model.field.Field.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class FieldTest {
@@ -102,6 +101,15 @@ public class FieldTest {
         Field field = new CircleField(3, 3);
         assertTrue(field.checkPositionIsOutOfBound(2, 2));
     }
+
+    @ParameterizedTest
+    @CsvSource({"3,0", "0,1", "5,4", "9,9"})
+    public void testSettingfinalVehicleLocation(int finalX, int finalY) {
+        Field field = new CircleField(15, 15);
+        field.setFinalVehicleLocation(finalX, finalY);
+        assertEquals(FINAL_VEHICLE_LOCATION_MARK, field.getFieldLocationAt(finalX, finalY));
+    }
+
 
 
 }

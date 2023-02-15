@@ -11,8 +11,9 @@ public abstract class Field {
     private final String[][] field;
     protected static final String VEHICLE_MARK = " 1";
     protected static final String INBOUND_MARK = " 0";
-
     protected static final String OUT_OF_BOUNDS_MARK = "-1";
+    protected static final String FINAL_VEHICLE_LOCATION_MARK = " 2";
+
 
 
     public Field(int rowLength, int colLength) {
@@ -106,6 +107,10 @@ public abstract class Field {
 
     public void setFieldLocationAt(int x, int y, String mark) {
         field[y][x] = mark;
+    }
+
+    public void setFinalVehicleLocation(int finalX, int finalY) {
+        setFieldLocationAt(finalX, finalY, FINAL_VEHICLE_LOCATION_MARK);
     }
 
     protected abstract void fillInboundField();
