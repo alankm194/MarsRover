@@ -14,8 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class CompletePathControllerTest {
@@ -166,6 +165,26 @@ public class CompletePathControllerTest {
         assertArrayEquals(fieldArrayExpectedMap.get(expectedKey), (String[][])argumentCaptor.getValue());
     }
 
+    @Test
+    public void whenVehicleIsPlacedONOutOfBoundMark_thenThrowIllegalArgumentException() {
+        VehicleFieldDTO vehicleFieldDTO = new VehicleFieldDTO(
+                new int[]{3, 3},
+                new int[]{0, 0},
+                "N",
+                List.of("M"),
+                "Mars Rover",
+                "Circle"
+        );
+        CompletePathController controller = new CompletePathController();
+
+
+        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class,
+                () -> controller.startController(vehicleFieldDTO, new ConsoleOutput()),
+                "test if vehicle is placed on Out of bound mark throw exception"
+        );
+
+        assertEquals("Vehicle is set in an illegal place", thrown.getMessage());
+    }
 
 
 
