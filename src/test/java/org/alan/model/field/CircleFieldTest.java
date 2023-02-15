@@ -12,8 +12,8 @@ public class CircleFieldTest {
         Field field = new CircleField(4, 4);
         String[][] CircleArray4x4 ={
             {"-1", " 0", " 0", "-1"},
-            {" 0"," 0", " 0", " 0" },
-            {" 0"," 0", " 0", " 0" },
+            {" 0", " 0", " 0", " 0" },
+            {" 0", " 0", " 0", " 0" },
             {"-1", " 0", " 0", "-1"},
         };
         assertArrayEquals(CircleArray4x4, field.getField());
