@@ -15,7 +15,7 @@ There are 2 vehicles to choose from, the Mars Rover and Knight Rover.
 
 - The original Mars Rover that can move 1 space forward in the direction it is facing. 
 
-- And the Knight Rover than can move 2  spaces forward and then 1 space to the left.
+- And the Knight Rover than can move 2 spaces forward and then 1 space to the left.
 
 ## Installation
 change into the home directory for Mars Rover 
@@ -64,16 +64,19 @@ as an initial
     4 4 W
 
 ## Usage
-Run the java application and enter the valid inputs into the command line.
+Run the java application and enter valid inputs into the command line.
 
 
-## Assumptions
+## Assumptions and design thoughts
 Tried to make a modular program by using the MVC design pattern. 
 
 The field would have a minimum size of 3 x 3 
-and a maximum of 1000 x 1000
+and a maximum of 300 x 300
 
-A vehicle that would go out of bounds of the field or land on a out of bound marked spot will stay in the same spot
+A vehicle that would go out of bounds of the field or move to an out of bound marked spot will stay in the same spot.
+
+Vehicles is an abstract class concrete vehicles classes inherit from. Concrete vehicle class must override the abstract method
+getMovementForCurrentDirection so field knows how to maneuver the vehicle.
 
 A Field is an abstract class that has a 2d Array representing a Rectangle that when initialized, 
 has all elements in 2d array marked out of bounds 
@@ -85,9 +88,11 @@ A problem occurs where on setup you place a vehicle in a field with a position t
 There is error handling in place to fix this, but it is in the Main method which is not great. 
 The assumption that vehicles can be placed anywhere in the field when I started has caused this problem.
 
-I regret choose -1 as the out of bound marker. To make printing the 2d array print evenly all single characters must have a space prefixing it.
+I regret choosing -1 as the out of bound marker. To make printing the 2d array print evenly all single characters must have a space prefixing it.
 I should have chosen a single character now I have spaces before all constants that represent a single character.
 It makes testing more troublesome
+
+If I were to change things, I would build ConsoleUserInput with testing in mind. 
 
 
 ## Attribution 
