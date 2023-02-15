@@ -34,11 +34,11 @@ public abstract class Field {
             int y = vehicle.getCurrentPosY();
             var move = vehicle.getMovementForCurrentDirection();
             CardinalPoint currentFace = vehicle.getCurrentFacingPosition();
-            setFieldLocationAt(x, y, INBOUND_MARK);
             setFieldLocationAt(x + move.moveX(), y + move.moveY(), VEHICLE_MARK);
             vehicle.setCurrentPosX(vehicle.getCurrentPosX() + move.moveX());
             vehicle.setCurrentPosY(vehicle.getCurrentPosY() + move.moveY());
             vehicle.setCurrentFacingPosition(changeVehicleDirection(move, currentFace));
+            setFieldLocationAt(x, y, vehicle.getCurrentFacingPosition().getArrow());
         }
 
     }

@@ -65,6 +65,12 @@ public class CardinalPointTest {
         assertEquals(CardinalPoint.valueOf(expected), CardinalPoint.getCardinalDirectionFromInitial(input));
     }
 
+    @ParameterizedTest
+    @CsvSource({"NORTH, ' ↑'", "EAST, ' →'", "SOUTH, ' ↓'", "WEST,' ←'"})
+    public void GivenCardinalDirection_thenReturnCorrectArrow(String input, String expected) {
+        CardinalPoint currentDirection = CardinalPoint.valueOf(input);
+        assertEquals( expected, currentDirection.getArrow());
+    }
 
 
 }
