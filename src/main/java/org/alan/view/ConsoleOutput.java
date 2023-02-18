@@ -2,14 +2,14 @@ package org.alan.view;
 
 import java.util.Arrays;
 
-public class ConsoleOutput {
-
-    public void outputAnswerToConsole(String output, String message) {
+public class ConsoleOutput implements Output {
+    @Override
+    public void outputAnswer(String output, String message) {
         System.out.println(message);
         System.out.println(output);
     }
-
-    public void outputFieldToConsole(String[][] output, String message) {
+    @Override
+    public void outputField(String[][] output, String message) {
         System.out.println(message);
         for(String[] row: output) {
             System.out.println(Arrays.toString(row));

@@ -1,26 +1,26 @@
 package org.alan.controller;
 
 import org.alan.model.field.CircleField;
-import org.alan.model.field.Field;
+import org.alan.model.field.Model;
 import org.alan.model.field.RectangleField;
 import org.alan.model.vehicle.CardinalPoint;
 import org.alan.model.vehicle.KnightVehicle;
 import org.alan.model.vehicle.MarsRover;
 import org.alan.model.vehicle.Vehicle;
-import org.alan.view.ConsoleOutput;
+import org.alan.view.Output;
 import org.alan.view.VehicleFieldDTO;
 
 import java.util.List;
 
 public class CompletePathController implements Controller {
 
-    private Field field;
+    private Model field;
 
     private static final String CIRCLE_FIELD = "Circle";
     private static final String KNIGHT_ROVER = "Knight Rover";
 
     @Override
-    public void startController(VehicleFieldDTO vehicleFieldDTO, ConsoleOutput output) throws IllegalArgumentException{
+    public void startController(VehicleFieldDTO vehicleFieldDTO, Output output) throws IllegalArgumentException{
         int[] fieldDimensions = vehicleFieldDTO.fieldDimensions();
         int[] vehicleStartCoordinates = vehicleFieldDTO.vehiclePosition();
 
@@ -35,8 +35,8 @@ public class CompletePathController implements Controller {
                 vehicleStartCoordinates[0],
                 vehicleStartCoordinates[1]);
 
-        output.outputFieldToConsole(field.getField(), "Output of final position of field with vehicle, Vehicle is marked as 1");
-        output.outputAnswerToConsole(finalLocation, String.format("final Coordinates for %s", vehicleFieldDTO.vehicleType()));
+        output.outputField(field.getField(), "Output of final position of field with vehicle, Vehicle is marked as 1");
+        output.outputAnswer(finalLocation, String.format("final Coordinates for %s", vehicleFieldDTO.vehicleType()));
     }
 
     private Vehicle createVehicle(String vehicleType, CardinalPoint startDirection) {

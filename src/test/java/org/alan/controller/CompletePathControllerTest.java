@@ -127,7 +127,7 @@ public class CompletePathControllerTest {
         ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
         controller.startController(vehicleFieldDTO, mockedOutput);
 
-        verify(mockedOutput, times(1)).outputAnswerToConsole(argumentCaptor.capture(), any());
+        verify(mockedOutput, times(1)).outputAnswer(argumentCaptor.capture(), any());
         assertEquals(expectedOutput, argumentCaptor.getValue());
     }
 
@@ -157,11 +157,7 @@ public class CompletePathControllerTest {
         ArgumentCaptor<Object> argumentCaptor = ArgumentCaptor.forClass(Object.class);
         controller.startController(vehicleFieldDTO, mockedOutput);
 
-        verify(mockedOutput, times(1)).outputFieldToConsole((String[][])argumentCaptor.capture(), any());
-        for(String[] f: (String[][]) argumentCaptor.getValue()){
-            System.out.println(Arrays.toString(f));
-        }
-
+        verify(mockedOutput, times(1)).outputField((String[][])argumentCaptor.capture(), any());
         assertArrayEquals(fieldArrayExpectedMap.get(expectedKey), (String[][])argumentCaptor.getValue());
     }
 

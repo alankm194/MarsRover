@@ -6,7 +6,7 @@ import org.alan.model.vehicle.Vehicle;
 
 import java.util.Arrays;
 
-public abstract class Field {
+public abstract class Field  implements Model{
 
     private final String[][] field;
     protected static final String STARTING_VEHICLE_MARK = " 1";
@@ -22,9 +22,8 @@ public abstract class Field {
 
     private String[][] createField(int rowLength, int colLength) {
         var stringArray = new String[rowLength][colLength];
-        for (String[] row : stringArray) {
-            Arrays.fill(row, OUT_OF_BOUNDS_MARK);
-        }
+        Arrays.stream(stringArray)
+                .forEach(row -> Arrays.fill(row, OUT_OF_BOUNDS_MARK));
         return stringArray;
     }
 

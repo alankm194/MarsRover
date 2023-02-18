@@ -21,7 +21,7 @@ public class ConsoleOutputTest {
     @Test
     public void outputAnswerToConsole() {
         ConsoleOutput consoleOutput = new ConsoleOutput();
-        consoleOutput.outputAnswerToConsole("This is my test", "test message");
+        consoleOutput.outputAnswer("This is my test", "test message");
         assertEquals("""
                         test message
                         This is my test""".replace("\n", "\r\n"),
@@ -35,7 +35,7 @@ public class ConsoleOutputTest {
                 {" 0", " 1", "2"},
                 {"77", "56", " 44"},
         };
-        consoleOutput.outputFieldToConsole(testArray, "test message");
+        consoleOutput.outputField(testArray, "test message");
         assertEquals("test message" + "\r\n"
                         + Arrays.toString(testArray[0]) + "\r\n"
                         + Arrays.toString(testArray[1]),

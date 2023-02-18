@@ -4,6 +4,7 @@ import org.alan.controller.CompletePathController;
 import org.alan.controller.Controller;
 import org.alan.view.ConsoleOutput;
 import org.alan.view.ConsoleUserInput;
+import org.alan.view.Output;
 
 public class Main {
 
@@ -11,7 +12,7 @@ public class Main {
         do {
             try {
                 Controller controller = new CompletePathController();
-                ConsoleOutput output = new ConsoleOutput();
+                Output output = new ConsoleOutput();
                 controller.startController(new ConsoleUserInput().getUserInputData(), output);
                 break;
             } catch (IllegalArgumentException E) {
