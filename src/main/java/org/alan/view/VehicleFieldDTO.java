@@ -1,7 +1,9 @@
 package org.alan.view;
 
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public record VehicleFieldDTO(int[] fieldDimensions,
                               int[] vehiclePosition,
@@ -27,5 +29,21 @@ public record VehicleFieldDTO(int[] fieldDimensions,
                 vehicleType,
                 fieldType
         );
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        VehicleFieldDTO that = (VehicleFieldDTO) o;
+        return Arrays.equals(fieldDimensions, that.fieldDimensions) && Arrays.equals(vehiclePosition, that.vehiclePosition) && vehicleFacing.equals(that.vehicleFacing) && movementInstructions.equals(that.movementInstructions) && vehicleType.equals(that.vehicleType) && fieldType.equals(that.fieldType);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(vehicleFacing, movementInstructions, vehicleType, fieldType);
+        result = 31 * result + Arrays.hashCode(fieldDimensions);
+        result = 31 * result + Arrays.hashCode(vehiclePosition);
+        return result;
     }
 }

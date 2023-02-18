@@ -14,9 +14,7 @@ public class ConsoleUserInput {
 
 
     public VehicleFieldDTO getUserInputData() {
-
         Scanner in = new Scanner(System.in);
-
         int[] startCoordinatesVehicle;
         String fieldType = getFieldType(in);
 
@@ -46,17 +44,17 @@ public class ConsoleUserInput {
         } while (true);
 
         String vehicleType  = getVehicleType(in);
-        List<String> ListOfMovements = getListOfMovements(in);
+        List<String> listOfMovements = getListOfMovements(in);
         return new VehicleFieldDTO(fieldDimensions,
                 startCoordinatesVehicle,
                 cardinalDirection,
-                ListOfMovements,
+                listOfMovements,
                 vehicleType,
                 fieldType);
     }
 
 
-    private List<String> getListOfMovements(Scanner in) {
+    List<String> getListOfMovements(Scanner in) {
         System.out.println("please enter movements for vehicle");
         String[] movements;
         do {
@@ -69,7 +67,7 @@ public class ConsoleUserInput {
         } while (true);
         return Arrays.asList(movements);
     }
-    private String getFieldType(Scanner in) {
+    String getFieldType(Scanner in) {
         String fieldType;
         System.out.println("Please choose a Field, your options are Rectangle or Circle");
         do {
@@ -82,7 +80,7 @@ public class ConsoleUserInput {
         } while(true);
         return fieldType;
     }
-    private String getVehicleType(Scanner in) {
+    String getVehicleType(Scanner in) {
         String vehicleType;
         System.out.println("Please choose a vehicle, your options are Mars Rover or Knight Rover");
         do {
@@ -95,7 +93,7 @@ public class ConsoleUserInput {
         } while(true);
         return vehicleType;
     }
-    private int[] getFieldDimensionInputData(Scanner in) {
+    int[] getFieldDimensionInputData(Scanner in) {
         System.out.println("""
                 Please enter Length and height dimensions to setup Plateau.
                 an example input 5 4
@@ -135,12 +133,12 @@ public class ConsoleUserInput {
         return 0 <= vehicleData[1] && vehicleData[1] < fieldData[1];
     }
 
-    private String[] getVehiclePositionInputData(Scanner in) {
+    String[] getVehiclePositionInputData(Scanner in) {
         String[] vehicleData;
         do {
             try {
                 String[] vehicleDataArray = in.nextLine().trim().split(" ");
-                if (!(vehicleDataArray.length == 3)) {
+                if (vehicleDataArray.length != 3) {
                     System.out.println("input must consist of 3 inputs, consisting of 2 integers as starting position and one letter as Cardinal direction e.g 5 4 E");
                     continue;
                 }
