@@ -35,7 +35,7 @@ public class CompletePathController implements Controller {
                 vehicleStartCoordinates[0],
                 vehicleStartCoordinates[1]);
 
-        output.outputField(field.getField(), "Output of final position of field with vehicle, Vehicle is marked as 1");
+        output.outputField(field.getField(), "Output of final position of field with vehicle, starting place of vehicle is marked as 1. final position of vehicle is marked as 2.");
         output.outputAnswer(finalLocation, String.format("final Coordinates for %s", vehicleFieldDTO.vehicleType()));
     }
 
