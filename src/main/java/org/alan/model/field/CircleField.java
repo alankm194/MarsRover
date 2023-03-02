@@ -8,8 +8,6 @@ public class CircleField extends Field {
 
     public CircleField(int rowLength, int colLength) {
         super(rowLength, colLength);
-        setUpCircularField(rowLength, colLength);
-        fillInboundField();
     }
 
     public void setUpCircularField(int rowLength, int colLength) {
@@ -67,7 +65,9 @@ public class CircleField extends Field {
 
     @Override
     protected void fillInboundField() {
-        for (String[] strings : super.getField()) {
+        String[][] field = super.getField();
+        setUpCircularField(field.length, field[0].length);
+        for (String[] strings : field) {
             boolean foundLeftCircleEdge = false;
             boolean foundOOBMarkInBetweenEdges = false;
             boolean foundRightCircleEdge = false;

@@ -18,6 +18,7 @@ public abstract class Field  implements Model{
 
     public Field(int rowLength, int colLength) {
         field = createField(rowLength, colLength);
+        fillInboundField();
     }
 
     private String[][] createField(int rowLength, int colLength) {

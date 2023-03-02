@@ -23,13 +23,13 @@ public class CircleFieldTest {
     public void test7x5CircleArrayHasCorrectOutput() {
         Field field = new CircleField(7, 5);
         String[][] CircleArray7x5 ={
-                {"-1", "-1", " 0" , "-1", "-1"},
+                {"-1", "-1", " 0", "-1", "-1"},
                 {"-1", " 0", " 0", " 0", "-1"},
                 {" 0", " 0", " 0", " 0", " 0"},
                 {" 0", " 0", " 0", " 0" ," 0"},
                 {" 0", " 0", " 0", " 0" ," 0"},
-                {"-1", " 0", " 0", " 0", "-1",},
-                {"-1", "-1", " 0", "-1", "-1",},
+                {"-1", " 0", " 0", " 0", "-1"},
+                {"-1", "-1", " 0", "-1", "-1"},
         };
         assertArrayEquals(CircleArray7x5, field.getField());
     }
